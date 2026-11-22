@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Kalorien- &amp; Proteinzähler{% endblock %} · Kalorien- &amp; Proteinzähler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#edf6f0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Speichert den Namen der aktuellen Route ab (welche @app.route ist in app.py akttv) -->
+  {% set ep = request.endpoint %}
+
+  <!-- Desktop-Navigation oben (US 1012) -->
+  <header class="topbar">
+    <!-- Logo bsw. der Name der Webseite oben links -->
+    <a class="brand" href="{{ url_for('index') }}">
+      <i class="bi bi-clock"></i><span>Kalorien- &amp; Proteinzähler</span>
+    </a>
+    <nav class="topnav">
+    <!-- Wenn man sich in index.html befindet, wird der Icon "aktiv", in dem er fett ausgedruckt ist-->
+      <a href="{{ url_for('index') }}" class="{{ 'active' if ep == 'index' }}">Tagesübersicht</a>
+      <a href="{{ url_for('lebensmittel') }}" class="{{ 'active' if ep in ('lebensmittel', 'edit_food') }}">Lebensmittel</a>
+      <a href="{{ url_for('profil') }}" class="{{ 'active' if ep == 'profil' }}">Profil &amp; Ziele</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- Lädt den Inhalt der Seiten, das Layout bleibt unverändert -->
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Mobile-Navigation unten -->
+  <nav class="bottomnav">
+    <a href="{{ url_for('index') }}" class="{{ 'active' if ep == 'index' }}">
+      <i class="bi bi-bar-chart"></i><span>Übersicht</span>
+    </a>
+    <a href="{{ url_for('lebensmittel') }}" class="{{ 'active' if ep in ('lebensmittel', 'edit_food') }}">
+      <i class="bi bi-list"></i><span>Lebensmittel</span>
+    </a>
+    <a href="{{ url_for('profil') }}" class="{{ 'active' if ep == 'profil' }}">
+      <i class="bi bi-person"></i><span>Profil</span>
+    </a>
+  </nav>
+
+  <!-- Rückmeldungen (US 1004, 1009) -->
+  <div class="feedbacks">
+    <!-- Holt sich die in app.py mit flash() gespeicherten Nachrichten ab -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="feedback {{ category }}" role="status">
+          <i class="bi {{ 'bi-check-circle-fill' if category == 'success' else 'bi-exclamation-triangle-fill' }}"></i>
+          <!-- Hier wird die Nachricht an den Nutzer zurückgegeben -->
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endwith %}
+  </div>
+</body>
+</html>

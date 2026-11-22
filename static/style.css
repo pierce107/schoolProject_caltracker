@@ -1,0 +1,105 @@
+* { 
+    box-sizing: border-box;
+}
+html { 
+    -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  min-height: 100vh;
+}
+h1, h2, h3, p {
+    margin: 0;
+}
+h1 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    line-height: 1.15;
+}
+a {
+    color: inherit;
+}
+[hidden] {
+    display: none !important;
+}
+
+/* ---------- Navigation ---------- */
+.topbar {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 16px; 
+    padding: 12px 32px;
+    background: #fff; 
+    border-bottom: 1px solid var(--line);
+    position: sticky; 
+    top: 0; 
+    z-index: 20;
+  }
+.brand { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+}
+.brand i {
+    color: var(--kcal);
+    font-size: 22px;
+}
+.topnav {
+    display: flex;
+    gap: 6px;
+}
+.topnav a {
+    text-decoration:none; 
+    padding: 9px 16px; 
+    border-radius: 10px;
+    font-weight: 600; 
+    font-size: 14px;
+  }
+.topnav a:hover { 
+    background: #f4f1fc;
+}
+.topnav a.active {
+    background: var(--accent);
+}
+.bottomnav { 
+    display: none;
+}
+.page { 
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 28px 32px 56px;
+}
+  
+/* ---------- Seitenkopf & Datumsnavigation ---------- */
+.page-header{
+    display: flex;
+    align-items: flex-end; 
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+.todays-date { 
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.page-header .muted { 
+    margin-top: 6px;
+}
+date-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  

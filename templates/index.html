@@ -1,0 +1,22 @@
+{% extends "base.html"} <!-- Erbt das Layout von base.html -->
+{% block title %}Tagesübersicht{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="todays-date">
+            <span class="only-desktop">{{ date_long }}</span>
+            <span class="only-mobile">{{ date_short }}</span>
+        </p>
+        <h1>{{ heading }}</h1>
+    </div>
+    <div class="date-nav">
+        <a class="icon_btn" href="{{ url_for('index', date=prev_date) }}"><i class=bi bi-chevron-left></i></a>
+        {% if is_today %}
+            <span class="btn btn-ghost is-disabled only-desktop">Heute</span>
+        {% else %}
+            <a class="btn btn-ghost only-desktop" href=" {{ url_for('index') }}">Heute</a>
+        {% endif %}
+        <a class="icon_btn" href="{{ url_for('index', date=next_date) }}"><i class="bi bi-chevron-right"></i></a>
+    </div>
+</div>
