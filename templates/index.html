@@ -1,4 +1,4 @@
-{% extends "base.html"} <!-- Erbt das Layout von base.html -->
+{% extends "base.html" %} <!-- Inherits the layout from base.html -->
 {% block title %}Tagesübersicht{% endblock %}
 
 {% block content %}
@@ -20,3 +20,39 @@
         <a class="icon_btn" href="{{ url_for('index', date=next_date) }}"><i class="bi bi-chevron-right"></i></a>
     </div>
 </div>
+<section class="stats">
+  <article class="card stat stat-kcal {{ 'over' if kcal.over }}">
+    <div class="stat-top">
+      <h2>Kalorien</h2>
+      <span class="muted only-desktop">Ziel {{ kcal.target|de_int }} kcal</span>
+    </div>
+    <div class="stat-value">
+      {{ kcal.consumed|de_int }}
+      <span class="only-desktop unit">kcal gegessen</span>
+      <span class="only-mobile unit">/ {{ kcal.target|de_int }}</span>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ kcal.bar }}"><span style="width: {{ kcal.bar }}%"></span></div>
+    <div class="stat-foot">
+      <span class="only-desktop">{{ kcal.pct }} % erreicht</span>
+      <span>{% if kcal.over %}{{ (-kcal.diff)|de_int }} kcal über Ziel{% else %}noch {{ kcal.diff|de_int }} kcal{% endif %}</span>
+    </div>
+  </article>
+
+  <article class="card stat stat-prot {{ 'over' if prot.over }}">
+    <div class="stat-top">
+      <h2>Protein</h2>
+      <span class="muted only-desktop">Ziel {{ prot.target|de_int }} g</span>
+    </div>
+    <div class="stat-value">
+      {{ prot.consumed|de_dec }} g
+      <span class="only-desktop unit">gegessen</span>
+      <span class="only-mobile unit">/ {{ prot.target|de_int }}</span>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ prot.bar }}"><span style="width: {{ prot.bar }}%"></span></div>
+    <div class="stat-foot">
+      <span class="only-desktop">{{ prot.pct }} % erreicht</span>
+      <span>{% if prot.over %}{{ (-prot.diff)|de_dec }} g über Ziel{% else %}noch {{ prot.diff|de_dec }} g{% endif %}</span>
+    </div>
+  </article>
+</section>
+{% endblock %}

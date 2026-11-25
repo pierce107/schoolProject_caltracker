@@ -12,17 +12,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <!-- Speichert den Namen der aktuellen Route ab (welche @app.route ist in app.py akttv) -->
+  <!-- Stores the name of the current route (which @app.route is active in app.py) -->
   {% set ep = request.endpoint %}
 
-  <!-- Desktop-Navigation oben (US 1012) -->
   <header class="topbar">
-    <!-- Logo bsw. der Name der Webseite oben links -->
+    <!-- Logo or website name in the top left -->
     <a class="brand" href="{{ url_for('index') }}">
       <i class="bi bi-clock"></i><span>Kalorien- &amp; Proteinzähler</span>
     </a>
     <nav class="topnav">
-    <!-- Wenn man sich in index.html befindet, wird der Icon "aktiv", in dem er fett ausgedruckt ist-->
+      <!-- When on index.html, the link becomes "active" (highlighted) -->
       <a href="{{ url_for('index') }}" class="{{ 'active' if ep == 'index' }}">Tagesübersicht</a>
       <a href="{{ url_for('lebensmittel') }}" class="{{ 'active' if ep in ('lebensmittel', 'edit_food') }}">Lebensmittel</a>
       <a href="{{ url_for('profil') }}" class="{{ 'active' if ep == 'profil' }}">Profil &amp; Ziele</a>
@@ -30,11 +29,11 @@
   </header>
 
   <main class="page">
-    <!-- Lädt den Inhalt der Seiten, das Layout bleibt unverändert -->
+    <!-- Loads the content of each page while keeping the layout consistent -->
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Mobile-Navigation unten -->
+  <!-- Bottom mobile navigation -->
   <nav class="bottomnav">
     <a href="{{ url_for('index') }}" class="{{ 'active' if ep == 'index' }}">
       <i class="bi bi-bar-chart"></i><span>Übersicht</span>
@@ -47,14 +46,13 @@
     </a>
   </nav>
 
-  <!-- Rückmeldungen (US 1004, 1009) -->
   <div class="feedbacks">
-    <!-- Holt sich die in app.py mit flash() gespeicherten Nachrichten ab -->
+    <!-- Fetches messages stored via flash() in app.py -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
         <div class="feedback {{ category }}" role="status">
           <i class="bi {{ 'bi-check-circle-fill' if category == 'success' else 'bi-exclamation-triangle-fill' }}"></i>
-          <!-- Hier wird die Nachricht an den Nutzer zurückgegeben -->
+          <!-- Outputs the message to the user -->
           <span>{{ message }}</span>
         </div>
       {% endfor %}

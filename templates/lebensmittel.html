@@ -1,1 +1,13 @@
-tes
+{% extends "base.html" %}
+{% block title %}Lebensmittel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <p class="todays-date">{{ total }} gespeichert</p>
+    <h1>{% if foods|length != total or query %}Suchergebnisse{% else %}Meine Lebensmittel{% endif %}</h1>
+    <p class="muted only-desktop">Einmal angelegt, stehen deine Lebensmittel an jedem Tag in der Schnellauswahl zur Verfügung.</p>
+  </div>
+</div>
+
+{% endblock %}
